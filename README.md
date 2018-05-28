@@ -1,4 +1,4 @@
-# Object Oriented JavaSript Arcade Game
+# Object Oriented JavaScript Arcade Game
 
 #### Frogger Style Arcade Game Clone
 
