@@ -13,25 +13,25 @@ const gameBoard = {
 	playerStartY: 380,
 }
 
-// Enemies our player must avoid
 class Enemy {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
 	constructor(startY, speed) {
 		this.sprite = 'images/enemy-bug.png';
+		// start them off canvas
 		this.x = -120;
+		// centers them in their lane
 		this.y = startY - (gameBoard.cellHeight/3);
+		// set the speed
 		this.speed = speed;
 	}
-	
+
 	checkCollisions(playerCords){
 		this.x <= (playerCords.x + gameBoard.cellWidth/2) && this.x >= (playerCords.x - gameBoard.cellWidth/2) ?
 			player.playerReset()
 			:
 			null
 	}
-	
-	// Update the enemy's position, required method for game
+
+	// Update the enemy's position
 	// Parameter: dt, a time delta between ticks
 	update(dt) {
 		// if we go just off canvas on right edge
@@ -41,60 +41,57 @@ class Enemy {
 		} else {
 			// move the bug along
 			this.x = this.x + (this.speed * dt);
-			
+
 			//check for collisions
 			const playerCords = player.getCords();
 			(this.y - 12) === playerCords.y ? this.checkCollisions(playerCords) : null
 		}
 	}
-	// Draw the enemy on the screen, required method for game
+		// Draw the enemy on the screen
     render() {
          ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 };
 
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 class Player {
 	constructor(){
 		this.sprite = 'images/char-boy.png';
 		this.x = gameBoard.playerStartX;
-		this.y = gameBoard.playerStartY;	
+		this.y = gameBoard.playerStartY;
 	}
-	
+
 	handleInput(direction) {
 		this.update(direction)
 	}
-	
-	update(direction) {		
+
+	update(direction) {
 		direction === 'left' && this.x >= (gameBoard.leftEdge + gameBoard.cellWidth/2) ?
 			this.x = this.x - gameBoard.cellWidth
 			:
 			direction === 'right' && this.x <= (gameBoard.rightEdge - gameBoard.cellWidth/2) ?
 				this.x = this.x + gameBoard.cellWidth
 				:
-				direction === 'up' && this.y >= (gameBoard.topEdge + gameBoard.cellHeight/2) ? 
+				direction === 'up' && this.y >= (gameBoard.topEdge + gameBoard.cellHeight/2) ?
 					this.y = this.y - gameBoard.cellHeight
 					:
-					direction === 'down' && this.y <= (gameBoard.bottomEdge - gameBoard.cellHeight) ? 
+					direction === 'down' && this.y <= (gameBoard.bottomEdge - gameBoard.cellHeight) ?
 						this.y = this.y + gameBoard.cellHeight
 						:
 						null
 	}
-	
-	// Draw the player on the screen, required method for game
+
+		// Draw the player on the screen
     render() {
          ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+		 // wait half second to check if player is in winner area
 		 setTimeout(()=> {
 			 if (this.y === (gameBoard.topEdge - 20)) {
 				 alert('You Won!');
 				 this.playerReset();
-			 }			 
+			 }
 		 }, 500)
     }
-	
+
 	getCords() {
 		const playerCords = {
 			x: this.x,
@@ -102,25 +99,25 @@ class Player {
 		};
 		return playerCords;
 	}
-	
+
 	playerReset() {
 		this.x = gameBoard.playerStartX;
 		this.y = gameBoard.playerStartY;
 	}
 }
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-const allEnemies = [
-	new Enemy((gameBoard.cellHeight), 400),
-	new Enemy((gameBoard.cellHeight*2), 300),
-	new Enemy((gameBoard.cellHeight*3), 200),
-	//310.80 y
-	new Enemy((gameBoard.cellHeight*4), 150)
-	];
-	//y is 296 after 1 move up
+const allEnemies = [];
+const createEnemies = (num, startSpeed) => {
+	let speed = startSpeed;
+	let lane = 1;
+	for (let i = 0; i <= num; i++){
+		allEnemies.push(new Enemy((gameBoard.cellHeight*lane),speed))
+		speed = speed - 100;
+		lane = lane + 1;
+		lane >= 4 ? lane = 1 : null
+	}
+}
+createEnemies(10,500);
 const player = new Player();
 
 
