@@ -1,6 +1,18 @@
-frontend-nanodegree-arcade-game
-===============================
+# Object Oriented JavaSript Arcade Game
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+#### Frogger Style Arcade Game Clone
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Game Description
+Just like frogger, the objective is to get the player safely to the water without hitting any enemy bugs.
+
+## How to Play
+Use the up, down, left, or right arrows to move the player. Don't hit any bugs!
+
+## Launching the Game
+Download/clone the git repo and open the `index.html` file with your browser.
+
+## Code Information
+Built with Object Oriented JavaScript, see the code in `js/app.js`.
+
+## Dependencies
+1. JavaScript enabled web browser
