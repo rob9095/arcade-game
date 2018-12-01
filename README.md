@@ -1,5 +1,7 @@
 # Object Oriented JavaScript Arcade Game
 
+See demo at https://frogger-clone-rt.herokuapp.com, tThe demo is hosted on a free plan so you will need to refresh after visiting once to wake the app up :)
+
 #### Frogger Style Arcade Game Clone
 
 ## Game Description
